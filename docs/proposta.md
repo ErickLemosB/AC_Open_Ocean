@@ -22,13 +22,56 @@ Nota: é importante notar que além da correção atmosférica, prevê=se uma m�
 
 A informação a ser produzida é essa como mostrada na figura 2, uma estimativa da reflectância de água (Bottom of Atmosphere - BOA), concebida através da remoção da influência atmosférica presentes nas imagens como na figura 1 de nível L1.
 
-**2. Contexto de aplicação:**
+**2. Contexto de aplicação:** A AC se mostra como uma etapa obrigatória de pré-processamento de dados em praticamente toda pesquisa e análise de sensoriamento remoto, independentemente da área de concentração da aplicação final. No caso deste projeto, escolhemos como foco o Oceano aberto, a ideia inicial seria corpos oceânicos no geral, porem tanto pelo tempo, quanto pela complexidade do problema, devido a algumas dificuldades encontradas para se utilizar apenas de um método para todos os corpos de água, como por exemplo áreas costeiras (que se demonstraram as mais desafiadoras por ter muita influência de outros elementos), decidimos diminuir os escopo do projeto apenas para Oceano aberto.
 
-**3. Objetivo:** 
+A correção da reflectância de água apoia um conjunto de aplicações, dentre elas:
 
-**4. Entrada e saída esperada:**
+2.1 Detecção de manchas de oléo e derramamentos.
+   
+2.2 Rastreamento de resíduos plásticos e outros detritos flutuantes.
+   
+2.3 Alertas precoce de floração de algas nocivas.
+   
+2.4 Suporte a gestão da pesca e mapear habitats marinhos. Dentre outros.
 
-**5. Imagens e dados:**
+O monitoramento da "cor do oceano" é apenas um deles. 
+
+Sobre o contexto de uso, ele é não comercial, o objetivo é conseguir reproduzir, nessa menor escala, esse pré-processamento.
+
+**3. Objetivo:**  Desenvolver e avaliar um pipeline de correção atmosférica para imagens multiespectrais de satélite sobre águas oceânicas abertas, utilizando esse cenário como estudo de caso do problema geral de correção atmosférica em PDI, de modo a estimar a reflectância da água a partir de dados no topo da atmosfera e comparar os resultados com produtos oficiais de referência.
+
+**Objetivos específicos:**
+
+3.1 Adquirir e organizar uma database inicial de cenas do Sentinel-2 MSI, do nível L1C, sobre áreas de oceano aberto, através do Copernicus Data Space Ecosystem e/ou Google Earth Engine.
+
+3.2 Pesquisar/investigar e testar o método clássico de correção atmosférica para águas case-1 (**black-pixel assumption**, Gordon e Wang, 1994), que usa de bandas do infra vermelho próximo (Short-Wave Infrared - SWIR), onde a reflectância da água é praticamente zero, para isolar e avaliar a influência da atmosfera.
+
+3.3 Fazer uma avaliação sobre a diferença entre a imagem corrigida e alguma referência já existente. (comparação de resultado dos métodos)
+
+3.4 Documentar as observações, incluindo falhas e acertos do método escolhido.
+
+**4. Entrada e saída esperada:** 
+
+**ENTRADA:** 
+4.1 Imagem multiespectral Sentinel-2 MSI de nível L1C (ou seja, com a reflectância da TOA), com bandas do que se diz "visível" até o infravermelho próximo/SWIR (índice esse, que como outros, pode ser extraído do Google Earth Engine em formato de CSV, junto com as bandas e pixels da imagem)
+
+4.2 Metadados de geometria, caso algum método torne necessário.
+
+4.3 Máscaras para isolar nuvens/terra
+
+**SAÍDA:**
+
+4.4 Imagem de reflectância de água estimada (BOA), para áreas de oceano aberto da cena, pixel a pixel.
+
+4.5 Comparação clara, visual e quantitativa (quando possível), entre a cena original (TOA) e a cena corrigida.
+
+Fluxo planejado:
+
+<img width="496" height="701" alt="Fluxo_Conceitual_PDI_M1_AC_Oceano_Aberto" src="https://github.com/user-attachments/assets/5d7d9fb3-8cb4-4887-b5fd-eb42926c2d19" />
+
+(Método de mascaramento de nuvens ainda está em discussão, então as imagens de exemplo ainda possuem nuvens/terra)
+
+**5. Imagens e dados:** 
 
 **6. Pipeline preliminar:**
 
