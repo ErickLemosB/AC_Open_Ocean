@@ -22,7 +22,17 @@ Nota: é importante notar que além da correção atmosférica, prevê=se uma m�
 
 A informação a ser produzida é essa como mostrada na figura 2, uma estimativa da reflectância de água (Bottom of Atmosphere - BOA), concebida através da remoção da influência atmosférica presentes nas imagens como na figura 1 de nível L1.
 
-**2. Contexto de aplicação:**
+**2. Contexto de aplicação:** A correção atmosférica (AC) é uma etapa obrigatória de pré processamento em praticamente toda pesquisa e análise de sensoriamento remoto, independentemente da área de aplicação final. A ideia inicial do grupo era tratar corpos ocêanicos de forma geral, mas devido ao tempo disponivel e à complexidade do problema, em especial as áreas costeiras, que se mostram mais desafiadoras por sofrerem forte influência de outros elementos, o escopo foi reduzido para o oceano aberto, onde um único método de correção tende a ser mais consistente
+
+A correção da reflectância da água sobre oceano aberto apoia um conjunto de aplicações:
+
+2.1 Detecção de manchas de óleo e derramamentos
+2.2 Rastreamento de resíduos plásticos e outros detritos flutuantes
+2.3 Alerta precoce de floroação de algas nocivas
+2.4 Suporte à gestão da pesca e ao mapeamento de habitats marinhos
+2.5 Monitoramento da "cor do oceano"
+
+
 
 **3. Objetivo:** 
 
