@@ -32,13 +32,29 @@ A correção da reflectância da água sobre oceano aberto apoia um conjunto de 
 2.4 Suporte à gestão da pesca e ao mapeamento de habitats marinhos
 2.5 Monitoramento da "cor do oceano"
 
+**3. Objetivo:** Desenvolver e avaliar um pipeline de correção atmosférica para imagens multiespectrais de satélite sobre águas oceânicas abertas, utilizando esse cenário como estudo de caso do problema geral de correção atmosférica em Processamento Digital de Imagens (PDI). O pipeline deve estimar a reflectância da água (BOA) a partir de dados capturados no topo da atmosfera (TOA, nível L1) e comparar os resultados obtidos com produtos oficiais de referência (nível L2A).
 
+**4. Entrada e saída esperada:** A entrada principal será composta por cenas multiespectrais Sentinel-2 no nível L1C, recortadas para áreas de oceano aberto. Cada cena deverá conter as bandas espectrais necessárias ao método escolhido, metadados de aquisição e informações euxiliares, como resolução espacioal, sistema de referência e condições de cobertura de nuvens. 
 
-**3. Objetivo:** 
+A saída esperada será um conjunto de itens, conforme resumido na tabela abaixo:
 
-**4. Entrada e saída esperada:**
+| Produto | Descrição | Formato inicial previsto |
+|---|---|---|
+| Reflectância corrigida | Estimativa da reflectância da água na BOA para cada banda processada | GeoTIFF ou matriz compatível |
+| Máscara de qualidade | Identificação de nuvens, sombras, pixels inválidos e regiões não utilizadas | GeoTIFF, PNG ou matriz booleana |
+| Composição visual | Visualização RGB ou falsa cor para inspeção dos resultados | PNG ou JPG |
+| Métricas de avaliação | Valores de erro, correlação e estatísticas por banda ou por região | CSV ou JSON |
+| Metadados do processamento | Parâmetros, cena de origem, bandas utilizadas e data de execução | JSON ou Markdown |
 
-**5. Imagens e dados:**
+O pipeline deverá preservar a georreferência sempre que o formato de entrada permitir. Pixels removidos pela máscara não deverão ser tratados como observações válidas nas métricas, e a ausência de dados deverá ser diferenciada de reflectância efetivamente estimada.
+
+**5. Imagens e dados:** Foram encontradas duas bases públicas de dados para uso no projeto, ambas fornecendo imagens do satélite Sentinel-2 MSI em nível L1C (reflectância no topo da atmosfera):
+
+5.1 Copernicus Browser (ESA/Copernicus) — [https://browser.dataspace.copernicus.eu/](https://browser.dataspace.copernicus.eu/)
+
+5.2 Google Earth Engine (GEE) — [https://code.earthengine.google.com/](https://code.earthengine.google.com/)
+
+As imagens podem ser baixadas em diferentes formatos, incluindo matrizes em formato CSV com as bandas e os índices espectrais escolhidos. Para fins de validação, também serão utilizados produtos de nível L2A (já com correção atmosférica oficial aplicada) das mesmas cenas, servindo como referência de comparação para os resultados obtidos pelo pipeline desenvolvido.
 
 **6. Pipeline preliminar:**
 
