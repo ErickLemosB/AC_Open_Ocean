@@ -1,4 +1,4 @@
-# AC_Open_Ocean
+# Atmospheric_Correction_Open_Ocean
 Repositório referente a proposta da etapa M1 de PDI
 
 **Proposta:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
