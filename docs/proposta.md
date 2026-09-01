@@ -1,4 +1,4 @@
-<img width="408" height="17" alt="image" src="https://github.com/user-attachments/assets/2aa82477-4f61-4822-b50f-9de55f0192e5" />**Projeto:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
+**Projeto:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
 
 **1. Problema:** Imagens de satélites ou imagens de sensoriamento remoto (SR) capturam, no topo da atmosfera (TOA), sinais provenientes da superfície, que se misturam com sinais introduzidos pela atmosfera (espalhamento e a absorção causados por aerossóis e gases) e essa mistura influencia o que se observa da TOA com o que realmente tem na superfície, ou base da atmosfera (BOA). Sobre áreas de oceano aberto, o problema do espalhamento e absorção é mais severo, e dificulta o estudo e quantificação dos dados observados, pois a radiância capturada pelo sensor tem cerca de 90% de origem da atmosfera, e não da água em si. Logo, para extrair informações mais confiáveis, é necessário fazer essa correção atmosférica.
 
@@ -103,9 +103,29 @@ Podemos observar que na matriz extraída temos a coluna de indexes, as que come�
 ou também por suas respectivas APIs. Porém, o mais interessante até agora é o GEE, pois por ele conseguimos personalizar mais a obtenção dos dados, pois ele suporta um editor de script onde podemos determinar várias características para fazer a extração dos dados.
 
 Foi utilizada da inteligência artificial generativa para gerar um script para gerar nosso banco de dados inicial.
-Script utilizado: 
 
-**6. Pipeline preliminar:**
+Script utilizado: https://github.com/ErickLemosB/AC_Open_Ocean/blob/main/src/scripts_GEE.js
+
+O QUE ESTE SCRIPT FAZ:
+
+   Pega 5 cenas Sentinel-2 (nível L1C, TOA — sem correção atmosférica) de
+   cada uma das 4 regiões oceânicas abaixo, e para cada cena exporta:
+     a) uma imagem "visível" (RGB, cor verdadeira) para o Google Drive;
+     b) um CSV com B2, B3, B4, B8, NDWI, SWIR1, SWIR2, latitude,
+        longitude e .geo, amostrados na grade de pixels da imagem.
+
+Regiões oceânicas: 
+
+South Atlantic — Santa Helena
+
+Indian Ocean — Diego Garcia
+
+North Atlantic — Faial, Açores
+
+South Pacific — Ilha de Páscoa
+
+   
+**6. Pipeline preliminar:** 
 
 **7. Arquitetura preliminar:**
 
