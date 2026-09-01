@@ -124,12 +124,25 @@ North Atlantic — Faial, Açores
 
 South Pacific — Ilha de Páscoa
 
+Os dados de imagem visual (.tif) podem ser abertos no ambiente QGIS https://qgis.org/download/.
+
+Embora o script para o GEE tenha conseguido dados reais para usar de input, percebeu-se que alguns dados eram inválidos, logo amostras tiradas do copernicus se mostraram mais viáveis.
    
 **6. Pipeline preliminar:** 
 
-**7. Arquitetura preliminar:**
+6.1 Adquirir cenas do sentinel-2 L1C de oceano aberto, via Copernicus ou GEE, dando entrada de data e região, e recebendo uma saída de imagem/matriz de bandas.
 
-**8. Estudo inicial e viabilidade:**
+6.2 Pré-processamento: Selecionar uma AOI, mascarar as nuvens e terra se possível, terá como entrada a TOA e saída a imagem mascarada.
+
+6.3 Correção atmosférica: mensurar e remover a influência atmosférica, utilizar do black-pixel assumption e tentar outras alternativas para avaliar, terá como entrada a TOA mascarada e como saída a reflectância da água (BOA).
+
+6.4 Avaliação: comparar resultado obtido com alguma referência já existente, tanto visual quanto pixel a pixel, terá como entrada a BOA e de saída comparações e figuras.
+
+6.5 Visualização/organização de resultados: Apresentar resultados, usar do matplotlib para tal, terá como entrada BOA e comparações e como saída, figuras.
+
+**7. Arquitetura preliminar:** A princípio ainda vai ficar do jeito que está atualmente, até ser necessário mudar ou adicionar coisas.
+
+**8. Estudo inicial e viabilidade:** Ao pesquisarmos sobre o assunto, descobrimos que a literatura é bem consolidade sobre o método a ser explorado (black-pixel assumption), há também ferramentas para testar, como o ACOLITE e POLYMER, que tem suporte para imagens do Sentinel-2, também temos duas bases consolidadas para uso (Copernicus e GEE), logo conseguimos enxergar viabilidade para começar e concluir o projeto.
 
 **9. Resultados ou experimentos preliminares:** Ainda não temos.
 
