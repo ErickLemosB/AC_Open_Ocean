@@ -1,4 +1,4 @@
-**Projeto:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
+<img width="408" height="17" alt="image" src="https://github.com/user-attachments/assets/2aa82477-4f61-4822-b50f-9de55f0192e5" />**Projeto:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
 
 **1. Problema:** Imagens de satélites ou imagens de sensoriamento remoto (SR) capturam, no topo da atmosfera (TOA), sinais provenientes da superfície, que se misturam com sinais introduzidos pela atmosfera (espalhamento e a absorção causados por aerossóis e gases) e essa mistura influencia o que se observa da TOA com o que realmente tem na superfície, ou base da atmosfera (BOA). Sobre áreas de oceano aberto, o problema do espalhamento e absorção é mais severo, e dificulta o estudo e quantificação dos dados observados, pois a radiância capturada pelo sensor tem cerca de 90% de origem da atmosfera, e não da água em si. Logo, para extrair informações mais confiáveis, é necessário fazer essa correção atmosférica.
 
@@ -71,7 +71,39 @@ Fluxo planejado:
 
 (Método de mascaramento de nuvens ainda está em discussão, então as imagens de exemplo ainda possuem nuvens/terra)
 
-**5. Imagens e dados:** 
+
+
+**5. Imagens e dados:** Encontramos duas bases públicas de dados que fornecem imagens de satélite Sentinel-2 MSI, nível L1C (TOA):
+
+5.1 Copernicus Data Space Ecosystem (ESA) — https://browser.dataspace.copernicus.eu/
+
+5.2 Google Earth Engine (GEE) — https://code.earthengine.google.com/
+
+Nessas bases as imagens podem ser baixadas em diferentes formatos e qualidades, incluindo matrizes em formato de CSV com as bandas e índices escolhidos (Google Earth Engine - GEE).
+
+Exemplo de imagem em formato matricial: 
+
+<img width="1569" height="792" alt="image" src="https://github.com/user-attachments/assets/22a38ef3-734f-46d3-a32d-3c4d13aac4e9" />
+
+Podemos observar que na matriz extraída temos a coluna de indexes, as que começam com B que são as bandas dos sensores, logo ao lado os índices como NDWI (Normalized Difference Water Index - Índice de Água por Diferença Normalizada ), SWIR1 (Short-Wave Infrared 1 - Banda do infravermelho de ondas curtas 1), SWIR2 (Short-Wave Infrared 2 - Banda do infravermelho de ondas curtas 2).
+
+**NDWI:** Se usa para identificar e analisar corpos d'água (geralmente utilizando bandas verdes e NIR(Near Infrared - Infravermelho próximo).
+
+**SWIR1:** Corresponde a banda B11 do sentinel-2, que é principalmente mais sensível a umidade e composição da superfície.
+
+**SWIR2:** Corresponde a banda B12 do Sentinel-2, se usa para analisar também a umidade, minerais e outras características da superfície. 
+
+É possível notar que as bandas B11 e B12 são respectivamente correspondentes aos índices SWIR1 e SWIR2, onde foi mostrado apenas para ilustrar que são equivalentes. Também podemos observar que a latitude e longitude podem ser organizado no formato GeoJSON, essa informação é muito importante pois cada posição dessa representa a posição real de cada pixel da imagem. 
+
+**Forma de obtenção:**  Os downloads dos dados podem ser feitos através dos links disponibilizados das plataformas: 
+1 - https://browser.dataspace.copernicus.eu/ ESA/Copernicus 
+
+2 - https://code.earthengine.google.com/ Google Earth Engine (GEE)
+
+ou também por suas respectivas APIs. Porém, o mais interessante até agora é o GEE, pois por ele conseguimos personalizar mais a obtenção dos dados, pois ele suporta um editor de script onde podemos determinar várias características para fazer a extração dos dados.
+
+Foi utilizada da inteligência artificial generativa para gerar um script para gerar nosso banco de dados inicial.
+Script utilizado: 
 
 **6. Pipeline preliminar:**
 
