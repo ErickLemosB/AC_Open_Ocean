@@ -30,11 +30,33 @@ Exemplo de correção atmosférica em terra/região costeira: <img width="900" h
 GIS & BEERS. Lo deberías saber sobre las imágenes Sentinel-2. [S. l.], [s. d.]. Disponível em: https://www.gisandbeers.com/lo-deberias-saber-imagenes-sentinel-2/. Acesso em: 31 ago. 2026.
 
 
-**Database:** Encontramos duas databases públicas para uso, que utilizam imagens do satélite Sentinel-2 MS1, no nível L1C (reflectância da TOA).
-1. https://browser.dataspace.copernicus.eu/ ESA/Copernicus
+**Database:** Encontramos duas databases públicas para uso, que utilizam imagens do satélite Sentinel-2 MS1, no nível L1C (reflectância da TOA). Porém, só vamos utilizar a do copernicus, por ser 100% gratuita.
+1. https://browser.dataspace.copernicus.eu/ ESA/Copernicus (A que vamos usar)
 2. https://code.earthengine.google.com/ Google Earth Engine (GEE)
 
-As imagens podem ser baixadas em diferentes formatos, incluindo matrizes (em formato de CSV) com as bandas e índicis escolhidos.
+**Especificações dos dados:**
+
+**1. Formato dos dados:** As imagens baixadas do Copernicus virão em formato de TIFF, pois vem com a reflectância física (0-1) já pronta.
+
+**2. Resolução da imagem:** Resolução custom para 20m, onde virão com a resolução 2100 x 1416 px. Essa escolha se deve por que as bandas B8A, B11 e B12 são nativas de 20m, e são as bandas mais importantes pare o projeto (NIR e SWIR).
+
+**3. Dados de posição:** Sobre o sistema de coordenadas, vai ser UTM da zona do tile escolhido, para facilitar alguns cálculos e entendimento, pois ela representa posições geográficas em metros.
+
+**4. Bandas extraídas:** 
+
+| Banda            | λ (nm)          | Motivos/descrição                                                                    |
+| ---------------- | --------------- | ------------------------------------------------------------------------------------ |
+| **B01**          | 443             | Banda aerossol/costeira, essencial para cor do oceano e mais sensível à atmosfera    |
+| B02, B03, B04    | 490 / 560 / 665 | Visível, onde está o sinal da água                                                   |
+| **B05**          | 705             | Red-edge, útil para clorofila e floração de algas                                    |
+| B06, **B07**     | 740 / 783       | B07 + B8A formam um par NIR                                                          |
+| B08              | 842             | NIR largo, opcional se já tiverem B8A                                                |
+| **B8A**          | 865             | NIR estreito, a banda clássica do black-pixel                                        |
+| **B11, B12**     | 1610 / 2190     | Par SWIR. Sobre o oceano a água é de fato preta aqui; é a variante SWIR              |
+| **B10** (só L1C) | 1375            | Cirrus, ótima para mascarar nuvens finas                                             |
+
+
+
 
 Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-23_59_Sentinel-2_L1C_True_color" src="https://github.com/user-attachments/assets/63f9507a-7531-42b0-bb30-1c85f31bb142" />
 
