@@ -57,7 +57,7 @@ Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-
 | B11, B12         | 1610 / 2190     | Par SWIR. Sobre o oceano a água é de fato preta aqui; é a variante SWIR              |
 | B10 (só L1C)     | 1375            | Cirrus, ótima para mascarar nuvens finas                                             |
 
-**5. Montagem do Dataset:** para montar o Dataset, foram selecionadas 4 AOIs (Areas of Interest), de tamanho compatível com a resolução escolhida e em 3 datas diferentes do ano, para ter mais dados em relação a posição do sol. Juntamente com a extração das bandas citadas, também foi extraído (através de scripts) 4 importantes variáveis que vão ser importantes para o pre-processamento dos dados, são esses: 
+**5. Montagem do Dataset:** para montar o Dataset, foram selecionadas 4 AOIs (Areas of Interest), de tamanho compatível com a resolução escolhida e em 3 datas diferentes do ano, em níveis L1C (TOA) e L2A(BOA) para ter mais dados em relação a posição do sol. Juntamente com a extração das bandas citadas, também foi extraído (através de scripts) 4 importantes variáveis que vão ser importantes para o pre-processamento dos dados, são esses: 
 
 **5.1 Ângulo zenital solar**: Ângulo entre a direção do Sol e a vertical local
 
@@ -75,8 +75,9 @@ Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-
 
 <img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/f20ec394-a658-4579-9232-d4ab6f066207" />
 
-
 Esses dados vão servir para a correção de Rayleigh (espalhamento de raios) que vem antes do black-pixel.
+
+
 
 **Estado atual do projeto:** Ainda está em discussão como vai ser desenvolvido e quais soluções, tecnologias e ferramentas que serão usadas.
 
