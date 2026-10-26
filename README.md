@@ -34,6 +34,8 @@ GIS & BEERS. Lo deberías saber sobre las imágenes Sentinel-2. [S. l.], [s. d.]
 1. https://browser.dataspace.copernicus.eu/ ESA/Copernicus (A que vamos usar)
 2. https://code.earthengine.google.com/ Google Earth Engine (GEE)
 
+Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-23_59_Sentinel-2_L1C_True_color" src="https://github.com/user-attachments/assets/63f9507a-7531-42b0-bb30-1c85f31bb142" />
+
 **Especificações dos dados:**
 
 **1. Formato dos dados:** As imagens baixadas do Copernicus virão em formato de TIFF, pois vem com a reflectância física (0-1) já pronta.
@@ -56,9 +58,6 @@ GIS & BEERS. Lo deberías saber sobre las imágenes Sentinel-2. [S. l.], [s. d.]
 | **B10** (só L1C) | 1375            | Cirrus, ótima para mascarar nuvens finas                                             |
 
 
-
-
-Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-23_59_Sentinel-2_L1C_True_color" src="https://github.com/user-attachments/assets/63f9507a-7531-42b0-bb30-1c85f31bb142" />
 
 **Estado atual do projeto:** Ainda está em discussão como vai ser desenvolvido e quais soluções, tecnologias e ferramentas que serão usadas.
 
