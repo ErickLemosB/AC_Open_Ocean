@@ -14,17 +14,17 @@ O projeto envolve processamento de imagens porque no processo a ser desenvolvido
 
 1.3 Análise de resultados por comparação visual e quantitativa entre as imagens de entrada e saída.
 
-**Situação Inicial:** Serão baixadas cenas de satélite que estão disponíveis publicamente em nível L1 (que refere-se a radiância e reflectância no topo da atmosfera TOA), sem a correção atmosférica aplicada, como na imagem de exemplo:
+**Situação Inicial:** Foram baixadas imagens (TIFF) de satélite que estão disponíveis publicamente em nível L1C (que refere-se a radiância e reflectância no topo da atmosfera TOA), sem a correção atmosférica aplicada, como na imagem de exemplo:
 
 **ANTES:** <img width="1470" height="916" alt="2026-08-29-00_00_2026-08-29-23_59_Sentinel-2_L1C_True_color" src="https://github.com/user-attachments/assets/40bf9bec-95cf-49c8-a93a-4ae565d13725" />
 Fig 1. Sentienl-2 LC1 true colors
 
+e também foram baixadas as mesmas imagens, nos mesmos locais e data de nível L2A (BOA, depois da correção). Como na imagem exemplo:
+
 **DEPOIS:**<img width="1470" height="916" alt="2026-08-29-00_00_2026-08-29-23_59_Sentinel-2_L2A_True_color (1)" src="https://github.com/user-attachments/assets/3b6ff96c-8700-46be-af48-746b5b7b8f11" />
 Fig. 2 Sentinel-2 LA2 true colors
 
-Nota: é importante notar que além da correção atmosférica, prevê=se uma máscara para remover as nuvens no "depois".
-
-A informação a ser produzida é essa como mostrada na figura 2, uma estimativa da reflectância de água (Bottom of Atmosphere - BOA), concebida através da remoção da influência atmosférica presentes nas imagens como na figura 1 de nível L1.
+A informação a ser produzida é essa como mostrada na figura 2, uma estimativa da reflectância de água (Bottom of Atmosphere - BOA), concebida através da remoção da influência atmosférica presentes nas imagens como na figura 1 de nível L1C.
 
 **2. Contexto de aplicação:** A AC se mostra como uma etapa obrigatória de pré-processamento de dados em praticamente toda pesquisa e análise de sensoriamento remoto, independentemente da área de concentração da aplicação final. No caso deste projeto, escolhemos como foco o Oceano aberto, a ideia inicial seria corpos oceânicos no geral, porem tanto pelo tempo, quanto pela complexidade do problema, devido a algumas dificuldades encontradas para se utilizar apenas de um método para todos os corpos de água, como por exemplo áreas costeiras (que se demonstraram as mais desafiadoras por ter muita influência de outros elementos), decidimos diminuir os escopo do projeto apenas para Oceano aberto.
 
@@ -46,7 +46,7 @@ Sobre o contexto de uso, ele é não comercial, o objetivo é conseguir reproduz
 
 **Objetivos específicos:**
 
-3.1 Adquirir e organizar uma database inicial de cenas do Sentinel-2 MSI, do nível L1C, sobre áreas de oceano aberto, através do Copernicus Data Space Ecosystem e/ou Google Earth Engine.
+3.1 Adquirir e organizar uma database inicial de cenas do Sentinel-2 MSI, do nível L1C, sobre áreas de oceano aberto, através do Copernicus Data Space Ecosystem. (feito)
 
 3.2 Pesquisar/investigar e testar o método clássico de correção atmosférica para águas case-1 (**black-pixel assumption**, Gordon e Wang, 1994), que usa de bandas do infra vermelho próximo (Short-Wave Infrared - SWIR), onde a reflectância da água é praticamente zero, para isolar e avaliar a influência da atmosfera.
 
@@ -59,9 +59,9 @@ Sobre o contexto de uso, ele é não comercial, o objetivo é conseguir reproduz
 **ENTRADA:** 
 4.1 Imagem multiespectral Sentinel-2 MSI de nível L1C (ou seja, com a reflectância da TOA), com bandas do que se diz "visível" até o infravermelho próximo/SWIR (índice esse, que como outros, pode ser extraído do Google Earth Engine em formato de CSV, junto com as bandas e pixels da imagem)
 
-4.2 Metadados de geometria, caso algum método torne necessário.
+4.2 Metadados de geometria.
 
-4.3 Máscaras para isolar nuvens/terra
+4.3 Máscaras para isolar nuvens/terra.
 
 **SAÍDA:**
 
@@ -77,76 +77,68 @@ Fluxo planejado:
 
 
 
-**5. Imagens e dados:** Encontramos duas bases públicas de dados que fornecem imagens de satélite Sentinel-2 MSI, nível L1C (TOA):
+**5. Imagens e dados:** Encontramos uma base pública de dados que fornece imagens de satélite Sentinel-2 MSI, nível L1C (TOA) e nível L2A (BOA):
 
-5.1 Copernicus Data Space Ecosystem (ESA) — https://browser.dataspace.copernicus.eu/
-
-5.2 Google Earth Engine (GEE) — https://code.earthengine.google.com/
-
-Nessas bases as imagens podem ser baixadas em diferentes formatos e qualidades, incluindo matrizes em formato de CSV com as bandas e índices escolhidos (Google Earth Engine - GEE).
-
-Exemplo de imagem em formato matricial: 
-
-<img width="1569" height="792" alt="image" src="https://github.com/user-attachments/assets/22a38ef3-734f-46d3-a32d-3c4d13aac4e9" />
-
-Podemos observar que na matriz extraída temos a coluna de indexes, as que começam com B que são as bandas dos sensores, logo ao lado os índices como NDWI (Normalized Difference Water Index - Índice de Água por Diferença Normalizada ), SWIR1 (Short-Wave Infrared 1 - Banda do infravermelho de ondas curtas 1), SWIR2 (Short-Wave Infrared 2 - Banda do infravermelho de ondas curtas 2).
-
-**NDWI:** Se usa para identificar e analisar corpos d'água (geralmente utilizando bandas verdes e NIR(Near Infrared - Infravermelho próximo).
-
-**SWIR1:** Corresponde a banda B11 do sentinel-2, que é principalmente mais sensível a umidade e composição da superfície.
-
-**SWIR2:** Corresponde a banda B12 do Sentinel-2, se usa para analisar também a umidade, minerais e outras características da superfície. 
-
-É possível notar que as bandas B11 e B12 são respectivamente correspondentes aos índices SWIR1 e SWIR2, onde foi mostrado apenas para ilustrar que são equivalentes. Também podemos observar que a latitude e longitude podem ser organizado no formato GeoJSON, essa informação é muito importante pois cada posição dessa representa a posição real de cada pixel da imagem. 
-
-**Forma de obtenção:**  Os downloads dos dados podem ser feitos através dos links disponibilizados das plataformas: 
 1 - https://browser.dataspace.copernicus.eu/ ESA/Copernicus 
 
-2 - https://code.earthengine.google.com/ Google Earth Engine (GEE)
+ou também por sua respectiva API.
 
-ou também por suas respectivas APIs. Porém, o mais interessante até agora é o GEE, pois por ele conseguimos personalizar mais a obtenção dos dados, pois ele suporta um editor de script onde podemos determinar várias características para fazer a extração dos dados.
+Através do site da Copernicus, conseguimos montar nosso Dataset de 4 áreas de interesse distintas.
 
-Foi utilizada da inteligência artificial generativa para gerar um script para gerar nosso banco de dados inicial.
+**5.1 Critérios de obtenção dos dados**: **1. Formato dos dados:** As imagens baixadas do Copernicus virão em formato de TIFF, pois vem com a reflectância física (0-1) já pronta.
 
-Script utilizado: https://github.com/ErickLemosB/AC_Open_Ocean/blob/main/src/scripts_GEE.js
+**5.2 Resolução da imagem:** Resolução custom para 20m, onde virão com a resolução por volta de 2100 x 1416 px (dependendo da seleção). Essa escolha se deve por que as bandas B8A, B11 e B12 são nativas de 20m, e são as bandas mais importantes pare o projeto (NIR e SWIR).
 
-O QUE ESTE SCRIPT FAZ:
+**5.3 Dados de posição:** Sobre o sistema de coordenadas, vai ser UTM da zona do tile escolhido, para facilitar alguns cálculos e entendimento, pois ela representa posições geográficas em metros.
 
-   Pega 5 cenas Sentinel-2 (nível L1C, TOA — sem correção atmosférica) de
-   cada uma das 4 regiões oceânicas abaixo, e para cada cena exporta:
-     a) uma imagem "visível" (RGB, cor verdadeira) para o Google Drive;
-     b) um CSV com B2, B3, B4, B8, NDWI, SWIR1, SWIR2, latitude,
-        longitude e .geo, amostrados na grade de pixels da imagem.
+**5.4 Bandas extraídas:** 
 
-Regiões oceânicas: 
+| Banda            | λ (nm)          | Motivos/descrição                                                                    |
+| ---------------- | --------------- | ------------------------------------------------------------------------------------ |
+| B01              | 443             | Banda aerossol/costeira, essencial para cor do oceano e mais sensível à atmosfera    |
+| B02, B03, B04    | 490 / 560 / 665 | Visível, onde está o sinal da água                                                   |
+| B05              | 705             | Red-edge, útil para clorofila e floração de algas                                    |
+| B06, B07         | 740 / 783       | B07 + B8A formam um par NIR                                                          |
+| B08              | 842             | NIR largo, opcional se já tiverem B8A                                                |
+| B8A              | 865             | NIR estreito, a banda clássica do black-pixel                                        |
+| B11, B12         | 1610 / 2190     | Par SWIR. Sobre o oceano a água é de fato preta aqui; é a variante SWIR              |
+| B10 (só L1C)     | 1375            | Cirrus, ótima para mascarar nuvens finas                                             |
 
-South Atlantic — Santa Helena
+**5.5 Montagem do Dataset:** para montar o Dataset, foram selecionadas 4 AOIs (Areas of Interest), de tamanho compatível com a resolução escolhida e em 3 datas diferentes do ano, em níveis L1C (TOA) e L2A(BOA) para ter mais dados em relação a posição do sol. Juntamente com a extração das bandas citadas, também foi extraído (através de scripts) 4 importantes variáveis que vão ser importantes para o pre-processamento dos dados, são esses: 
 
-Indian Ocean — Diego Garcia
+**5.5.1 Ângulo zenital solar**: Ângulo entre a direção do Sol e a vertical local
 
-North Atlantic — Faial, Açores
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/861bec02-e290-44ab-920a-1e00e20d87d8" />
 
-South Pacific — Ilha de Páscoa
+**5.5.2 Ângulo azimutal solar**: Indica a direção horizontal de onde vem a luz solar
 
-Os dados de imagem visual (.tif) podem ser abertos no ambiente QGIS https://qgis.org/download/.
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/2ab15f99-16e2-400b-8dfe-45a72be2684f" />
 
-Embora o script para o GEE tenha conseguido dados reais para usar de input, percebeu-se que alguns dados eram inválidos, logo amostras tiradas do copernicus se mostraram mais viáveis.
+**5.5.3 Ângulo zenital médio de observação**: Representa o ângulo médio entre a direção de observação do sensor e a vertical local.
+
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/2636808d-9c38-4a19-8b3d-3510698ad885" />
+
+**5.5.4 Ângulo azimutal médio de observação**: Indica a direção horizontal média para a qual o sensor está apontado
+
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/f20ec394-a658-4579-9232-d4ab6f066207" />
+
+Esses dados vão servir para a correção de Rayleigh (espalhamento de raios) que vem antes do black-pixel.
    
 **6. Pipeline preliminar:** 
 
-6.1 Adquirir cenas do sentinel-2 L1C de oceano aberto, via Copernicus ou GEE, dando entrada de data e região, e recebendo uma saída de imagem/matriz de bandas.
+6.1 Adquirir dados do sentinel-2 L1C de oceano aberto, via Copernicus, dando entrada de data e região, e recebendo saída imagens TIFF de bandas, juntamente com os dados geométricos citados a cima.
 
-6.2 Pré-processamento: Selecionar uma AOI, mascarar as nuvens e terra se possível, terá como entrada a TOA e saída a imagem mascarada.
+6.2 Pré-processamento: Selecionar uma AOI, mascarar as nuvens se possível, terá como entrada a TOA e saída a imagem mascarada.
 
 6.3 Correção atmosférica: mensurar e remover a influência atmosférica, utilizar do black-pixel assumption e tentar outras alternativas para avaliar, terá como entrada a TOA mascarada e como saída a reflectância da água (BOA).
 
-6.4 Avaliação: comparar resultado obtido com alguma referência já existente, tanto visual quanto pixel a pixel, terá como entrada a BOA e de saída comparações e figuras.
+6.4 Avaliação: comparar resultado obtido com a referência já existente, terá como entrada a BOA e de saída comparações e figuras.
 
 6.5 Visualização/organização de resultados: Apresentar resultados, usar do matplotlib para tal, terá como entrada BOA e comparações e como saída, figuras.
 
 **7. Arquitetura preliminar:** A princípio ainda vai ficar do jeito que está atualmente, até ser necessário mudar ou adicionar coisas.
 
-**8. Estudo inicial e viabilidade:** Ao pesquisarmos sobre o assunto, descobrimos que a literatura é bem consolidade sobre o método a ser explorado (black-pixel assumption), há também ferramentas para testar, como o ACOLITE e POLYMER, que tem suporte para imagens do Sentinel-2, também temos duas bases consolidadas para uso (Copernicus e GEE), logo conseguimos enxergar viabilidade para começar e concluir o projeto.
+**8. Estudo inicial e viabilidade:** Ao pesquisarmos sobre o assunto, descobrimos que a literatura é bem consolidade sobre o método a ser explorado (black-pixel assumption), há também ferramentas para testar, como o ACOLITE e POLYMER, que tem suporte para imagens do Sentinel-2, também temos uma boa base de dados para uso (Copernicus), logo conseguimos enxergar viabilidade para começar e concluir o projeto.
 
 **9. Resultados ou experimentos preliminares:** Ainda não temos.
 
