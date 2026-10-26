@@ -79,7 +79,7 @@ Fluxo planejado:
 
 **5. Imagens e dados:** Encontramos uma base pública de dados que fornece imagens de satélite Sentinel-2 MSI, nível L1C (TOA) e nível L2A (BOA):
 
-1 - https://browser.dataspace.copernicus.eu/ ESA/Copernicus 
+1 - https://browser.dataspace.copernicus.eu/
 
 ou também por sua respectiva API.
 
