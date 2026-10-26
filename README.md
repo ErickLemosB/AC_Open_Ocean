@@ -40,7 +40,7 @@ Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-
 
 **1. Formato dos dados:** As imagens baixadas do Copernicus virão em formato de TIFF, pois vem com a reflectância física (0-1) já pronta.
 
-**2. Resolução da imagem:** Resolução custom para 20m, onde virão com a resolução 2100 x 1416 px. Essa escolha se deve por que as bandas B8A, B11 e B12 são nativas de 20m, e são as bandas mais importantes pare o projeto (NIR e SWIR).
+**2. Resolução da imagem:** Resolução custom para 20m, onde virão com a resolução por volta de 2100 x 1416 px (dependendo da seleção). Essa escolha se deve por que as bandas B8A, B11 e B12 são nativas de 20m, e são as bandas mais importantes pare o projeto (NIR e SWIR).
 
 **3. Dados de posição:** Sobre o sistema de coordenadas, vai ser UTM da zona do tile escolhido, para facilitar alguns cálculos e entendimento, pois ela representa posições geográficas em metros.
 
