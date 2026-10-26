@@ -48,14 +48,14 @@ Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-
 
 | Banda            | λ (nm)          | Motivos/descrição                                                                    |
 | ---------------- | --------------- | ------------------------------------------------------------------------------------ |
-| **B01**          | 443             | Banda aerossol/costeira, essencial para cor do oceano e mais sensível à atmosfera    |
+| B01              | 443             | Banda aerossol/costeira, essencial para cor do oceano e mais sensível à atmosfera    |
 | B02, B03, B04    | 490 / 560 / 665 | Visível, onde está o sinal da água                                                   |
-| **B05**          | 705             | Red-edge, útil para clorofila e floração de algas                                    |
-| B06, **B07**     | 740 / 783       | B07 + B8A formam um par NIR                                                          |
+| B05              | 705             | Red-edge, útil para clorofila e floração de algas                                    |
+| B06, B07         | 740 / 783       | B07 + B8A formam um par NIR                                                          |
 | B08              | 842             | NIR largo, opcional se já tiverem B8A                                                |
-| **B8A**          | 865             | NIR estreito, a banda clássica do black-pixel                                        |
-| **B11, B12**     | 1610 / 2190     | Par SWIR. Sobre o oceano a água é de fato preta aqui; é a variante SWIR              |
-| **B10** (só L1C) | 1375            | Cirrus, ótima para mascarar nuvens finas                                             |
+| B8A              | 865             | NIR estreito, a banda clássica do black-pixel                                        |
+| B11, B12         | 1610 / 2190     | Par SWIR. Sobre o oceano a água é de fato preta aqui; é a variante SWIR              |
+| B10 (só L1C)     | 1375            | Cirrus, ótima para mascarar nuvens finas                                             |
 
 
 
