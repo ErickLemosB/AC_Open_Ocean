@@ -77,8 +77,6 @@ Imagem exemplo: <img width="1470" height="917" alt="2026-08-24-00_00_2026-08-24-
 
 Esses dados vão servir para a correção de Rayleigh (espalhamento de raios) que vem antes do black-pixel.
 
+**Estado atual do projeto:** Já temos alguns códigos testando o início da nossa implementação, leitura das imagens, montagem de figura em cores verdadeiras e a implementação das mascaras já estão funcionais no projeto e já geraram resultado.
 
-
-**Estado atual do projeto:** Ainda está em discussão como vai ser desenvolvido e quais soluções, tecnologias e ferramentas que serão usadas.
-
-**Tecnologias previstas:** A princípio o projeto vai ser desenvolvido em Pyhton, aproveitando de bibliotecas já consolidadas de SR e PDI. Para obter os dados é pretendido usar a API da copernicus, numpy para operações sobre as matrizes que contem as bandas, além de outras como matplotlib para fazer comparações. O resto ainda está em discussão.
+**Tecnologias previstas:** O projeto está sendo desenvolvido em Pyhton, aproveitando de bibliotecas já consolidadas de SR e PCI. É pretendido usar dados da copernicus, numpy para operações sobre as matrizes que contem as bandas, além de outras como matplotlib para fazer comparações, scipy para complementar o numpy. Podemos acompanhar as tecnologias em [requirements.txt](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/requirements.txt)
