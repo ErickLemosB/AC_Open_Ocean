@@ -9,3 +9,5 @@ e como output tivemos:
 <img width="817" height="359" alt="image" src="https://github.com/user-attachments/assets/325ecd93-6b22-40b1-9dba-582fe8c1745b" />
 
 e para visualizar as imagens, basta abrir AC_Open_Ocean/images/results/true_color_outputs
+
+Após concluir cada teste, os mesmos serão comentados no código para evitar que rode toda vez que executado.
