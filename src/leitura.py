@@ -44,10 +44,10 @@ def ler_cena(pasta):
 
 if __name__ == "__main__":
     # Teste 1: uma cena em detalhe.
-    pasta_aoi = PASTA_ENTRADA / "AOI_1_Florianopolis"
+    """pasta_aoi = PASTA_ENTRADA / "AOI_1_Florianopolis"
     bandas_l1c, tem_dado = ler_cena(pasta_aoi / "Florianopolis_L1C_2026_06_16")
     bandas_l2a, _ = ler_cena(pasta_aoi / "Florianopolis_L2A_2026_06_16")
-    """print(f"Florianopolis 2026_06_16: shape {tem_dado.shape}, {100 * tem_dado.mean():.1f}% com dado")
+    print(f"Florianopolis 2026_06_16: shape {tem_dado.shape}, {100 * tem_dado.mean():.1f}% com dado")
     print("Banda  L1C mín   L1C máx   L2A mín  L2A máx   (pixels com dados válidos)")
     for nome in bandas_l1c:
         l1c = bandas_l1c[nome][tem_dado]
