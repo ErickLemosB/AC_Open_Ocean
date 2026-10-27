@@ -55,10 +55,11 @@ if __name__ == "__main__":
         if nome in bandas_l2a:  #TIFFs de L2A n contém B10.
             l2a = bandas_l2a[nome][tem_dado]
             linha += f"  {l2a.min():8.4f} {l2a.max():8.4f}"
-        print(linha)"""
+        print(linha)
+        """
         
     # Teste 2: testando agora todos os pares. Vamos testar com uma booleana se os pares (TOA e BOA, vulgo L1C e L2A) tem mesmo shape e o mesmo datamask.
-    cenas = listar_cenas()
+    """cenas = listar_cenas()
     print(f"\n{len(cenas)} pares L1C/L2A:")
     for cena in cenas:
         bandas_l1c, dado_l1c = ler_cena(cena["pasta_l1c"])
@@ -67,3 +68,4 @@ if __name__ == "__main__":
         print(f"{cena['aoi']:20s} {cena['data']}  bandas {len(bandas_l1c)}/{len(bandas_l2a)}  "
               f"shape {dado_l1c.shape}  com dado {100 * dado_l1c.mean():.1f}%  "
               f"mesmo shape e dataMask: {'sim' if igual else 'NÃO'}")
+              """
