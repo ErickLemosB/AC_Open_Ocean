@@ -17,7 +17,7 @@ def cor_verdadeira(bandas, tem_dado):
 
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     #teste 3: Geracao de imagens para todos os pares que temos (true color no caso)
     for cena in listar_cenas():
         bandas_l1c, tem_dado = ler_cena(cena["pasta_l1c"])
@@ -36,3 +36,4 @@ if __name__ == "__main__":
         fig.savefig(saida, dpi=150, bbox_inches="tight") #bbox serve para cortar as bordas.
         plt.close(fig) #da um close na figura salva para salvar memória.
         print("figura salva em", saida.relative_to(RAIZ))
+        """
