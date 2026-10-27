@@ -10,7 +10,7 @@ PASTA_ENTRADA = RAIZ / "images" / "input"
 def listar_cenas():
     #funcao que vai encontrar os pares de dados que temos (L1C e L2A) nas pastas de entrada. 1 por AOI.
     cenas = []
-    for pasta_l1c in sorted(PASTA_ENTRADA).glob("AOI_*/*_L1C_*"):
+    for pasta_l1c in sorted(PASTA_ENTRADA.glob("AOI_*/*_L1C_*")):
         cenas.append({
             #Ao montar o dataset, seguimos um padrão de formatacao de nome para poder ter esse tipo de controle depois.
             "aoi": pasta_l1c.parent.name,              # "AOI_1_Florianopolis"
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     pasta_aoi = PASTA_ENTRADA / "AOI_1_Florianopolis"
     bandas_l1c, tem_dado = ler_cena(pasta_aoi / "Florianopolis_L1C_2026_06_16")
     bandas_l2a, _ = ler_cena(pasta_aoi / "Florianopolis_L2A_2026_06_16")
-    print(f"Florianopolis 2026_06_16: shape {tem_dado.shape}, {100 * tem_dado.mean():.1f}% com dado")
+    """print(f"Florianopolis 2026_06_16: shape {tem_dado.shape}, {100 * tem_dado.mean():.1f}% com dado")
     print("Banda  L1C mín   L1C máx   L2A mín  L2A máx   (pixels com dados válidos)")
     for nome in bandas_l1c:
         l1c = bandas_l1c[nome][tem_dado]
@@ -55,4 +55,15 @@ if __name__ == "__main__":
         if nome in bandas_l2a:  #TIFFs de L2A n contém B10.
             l2a = bandas_l2a[nome][tem_dado]
             linha += f"  {l2a.min():8.4f} {l2a.max():8.4f}"
-        print(linha)
+        print(linha)"""
+        
+    # Teste 2: testando agora todos os pares. Vamos testar com uma booleana se os pares (TOA e BOA, vulgo L1C e L2A) tem mesmo shape e o mesmo datamask.
+    cenas = listar_cenas()
+    print(f"\n{len(cenas)} pares L1C/L2A:")
+    for cena in cenas:
+        bandas_l1c, dado_l1c = ler_cena(cena["pasta_l1c"])
+        bandas_l2a, dado_l2a = ler_cena(cena["pasta_l2a"])
+        igual = np.array_equal(dado_l1c, dado_l2a)
+        print(f"{cena['aoi']:20s} {cena['data']}  bandas {len(bandas_l1c)}/{len(bandas_l2a)}  "
+              f"shape {dado_l1c.shape}  com dado {100 * dado_l1c.mean():.1f}%  "
+              f"mesmo shape e dataMask: {'sim' if igual else 'NÃO'}")
