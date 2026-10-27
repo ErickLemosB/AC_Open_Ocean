@@ -1,4 +1,4 @@
-<img width="1145" height="309" alt="image" src="https://github.com/user-attachments/assets/8854131e-eb38-4e64-a5b4-fba7a78f1882" />**Projeto:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
+**Projeto:** Correção atmosférica (AC) de imagens de sensoriamento remoto para áreas de oceano aberto
 
 **Integrantes: Erick Lemos Barreto, Janine de Paula, Melissa Moreira de Oliveira**
 
