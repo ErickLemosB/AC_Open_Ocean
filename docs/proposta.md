@@ -144,30 +144,6 @@ Esses dados vão servir para a correção de Rayleigh (espalhamento de raios) qu
 
 **10. Código e reprodutibilidade:** O código comentado (manualmente para deixar explicativo) está disponível em [Source](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src)
 
-**10.1** Nosso módulo de leitura: [leitura.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/leitura.py). Esse módulo vai carregar as cenas baixadas do Copernicus que ficam em [images/input](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/images/input), percorrendo as pastas das nossas AOIs e montando os pares L1C/L2A de cada data escolhida.
-
-<img width="821" height="134" alt="image" src="https://github.com/user-attachments/assets/2ca42bf9-c13b-4efe-a7eb-3227d052d8b8" /> 
-
-Essa função abre nossos GeoTIFF e devolve duas camadas: a reflectância da banda e a máscara de dados válidos vulgo datamask.
-
-<img width="1145" height="309" alt="image" src="https://github.com/user-attachments/assets/d1daeb5a-9a4c-4f56-a9f2-04af5968bf4e" />
-
-Já essa função vai ler as bandas de uma cena e vai guardar elas em um dicionário indexado por seus nomes (B01,B02...). A máscara de dados válidos final é a intersecção das máscaras de todas as bandas. (ou seja, um pixel só vai ser válido se existir dado em todas elas.)
-
-Nos testes desse módulo confirmamos que os pares tem as mesmas dimensões e datamask, o que torna nossa comparação pixel a pixel viável. Para visualizar os testes acesse [Test_1](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/Tests_Outputs/Test_1.md) e [Test_2](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/Tests_Outputs/Test_2.md)
-
-**10.2** Nosso módulo que monta as figuras de cor verdadeira das cenas: [figuras.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/figuras.py). Esse módulo gera as imagens em true color para inspeção visual.
-
-<img width="1398" height="236" alt="image" src="https://github.com/user-attachments/assets/3c84a4e5-234f-4e60-b37f-01e0a8a79039" />
-
-Essa função vai empilhar as bandas no canal RGB (respectivamente B04, B03 e B02) e depois vai dividir a reflectância por um valor fixo de 0,4 e limita o valor entre o intervalo [0,1]
-
-Sobre a escala de 0,4: ela equivale ao ganho de x2.5 usado no Copernicus.
-Sobre o datamask, ele é usado como canal de transparência. Desse jeito, as regiões sem dados não aparecem como pixel escuro, que poderia ser confundido com água.
-
-Ao executar o módulo, obtemos uma figura para cada cena, comparando L1C com L2A lado a lado. Podemos visualizar a saída aqui [true_color_outputs](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/images/results/true_color_outputs) e o teste aqui [Test_3](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/Tests_Outputs/Test_3.md).
-
-
 
 **11. Vídeo da M1:**
 1. identificação da equipe e do projeto;
