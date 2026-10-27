@@ -1,0 +1,9 @@
+Sobre o uso de IA Generativa nesse trabalho: 
+ 1. Tipo usado: Claude code
+ 2. Para quais fins?: 
+  2.1 Commit automático do Dataset (montado manualmente).
+  2.2 Gerar material de estudo para melhor entendimento dos assuntos abordados.
+  2.3 Gerar exemplos de código para melhor entendimento do desenvolvimento.
+  2.4 Auxílio no desenvolvimento do código para eventuais dúvidas durante o processo.
+  2.5 Gerar o molde base do código nos padrões solicitados.
+(Nota: Ouve uso do copilot para automatizar a descricao de alguns commits pela praticidade)
