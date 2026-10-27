@@ -1,4 +1,7 @@
 Após o sucesso do test 1, decidimos fazer um segundo teste, para ver se os pares L1C e L2A tinham o mesmo shape e datamask.
+
+Teste feito em [leitra.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/leitura.py)
+
 <img width="811" height="194" alt="image" src="https://github.com/user-attachments/assets/6f1d76ab-0bf1-4b1e-86b9-016b2b03ca82" />
 
 resultado obtido:
