@@ -42,7 +42,7 @@ def ler_cena(pasta):
         mascaras.append(tem_dado)
     return bandas, np.all(mascaras, axis=0)
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     # Teste 1: uma cena em detalhe.
     """pasta_aoi = PASTA_ENTRADA / "AOI_1_Florianopolis"
     bandas_l1c, tem_dado = ler_cena(pasta_aoi / "Florianopolis_L1C_2026_06_16")
