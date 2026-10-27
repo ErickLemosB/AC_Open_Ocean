@@ -6,3 +6,5 @@ resultado obtido:
 <img width="929" height="358" alt="image" src="https://github.com/user-attachments/assets/faa1d081-ed83-4654-9edc-2ec31d40a814" />
 
 Com esse teste confirmamos que os dados dos pares estão de acordo, e podemos começar a trabalhar nas soluções.
+
+Após concluir cada teste, os mesmos serão comentados no código para evitar que rode toda vez que executado.
