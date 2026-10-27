@@ -1,3 +1,5 @@
+Teste 1 feito em [leitra.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/leitura.py)
+
 <img width="897" height="301" alt="image" src="https://github.com/user-attachments/assets/54d4ec63-969e-4c10-9fba-c107ad4eab3e" />
 
 Pegamos um par para testar a leitura das bandas (onde os dados são válidos) e ao rodar o código obtivemos esse resultado:
