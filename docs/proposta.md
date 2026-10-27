@@ -76,7 +76,6 @@ Fluxo planejado:
 (Método de mascaramento de nuvens ainda está em discussão, então as imagens de exemplo ainda possuem nuvens/terra)
 
 
-
 **5. Imagens e dados:** Encontramos uma base pública de dados que fornece imagens de satélite Sentinel-2 MSI, nível L1C (TOA) e nível L2A (BOA):
 
 1 - https://browser.dataspace.copernicus.eu/
@@ -157,6 +156,3 @@ Esses dados vão servir para a correção de Rayleigh (espalhamento de raios) qu
 10. experimentos ou protótipos já realizados, quando houver;
 11. dificuldades ou incertezas encontradas;
 12. próximos passos previstos para a M2.
-
-
-
