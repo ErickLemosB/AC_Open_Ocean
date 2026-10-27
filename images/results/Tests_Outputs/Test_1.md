@@ -5,3 +5,5 @@ Pegamos um par para testar a leitura das bandas (onde os dados são válidos) e 
 <img width="663" height="357" alt="image" src="https://github.com/user-attachments/assets/57f29949-352f-4b0e-b541-36fe8d37ff02" />
 
 Obs: A ausência de dados na banda B10 no L2A é normal, pois L2A não tem B10.
+
+Após concluir cada teste, os mesmos serão comentados no código para evitar que rode toda vez que executado.
