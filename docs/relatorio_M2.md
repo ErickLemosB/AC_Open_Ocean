@@ -4,7 +4,7 @@ Projeto: Correção atmosférica (AC) de imagens de sensoriamento remoto para á
 
 Integrantes: Erick Lemos Barreto, Janine de Paula, Melissa Moreira de Oliveira
 
-Link para apresentação M2: **ADICIONAR O LINK AQUI**
+Link para apresentação M2: https://youtu.be/hud27jPzctY
 
 ---
 
