@@ -18,11 +18,53 @@ Na etapa M2, o enfoque recai sobre segmentação, morfologia e descrição de re
 
 ## 3. Resposta ao feedback 
 
-PREENCHER
+3.1 Um dos pontos reclamados no feedbakc passado foi a questão do controle de dados, agora temos somente GeoTIFFs no nosso dataset, sem vários metadados separados e CSVs.
+3.1 Outro ponto foi a definição de especificações matemáticas sobre as máscaras, que foi desenvolvido no mascara.py e apresentou resultados satisfatórios.
+3.3 Também desenvolvemos/adicionamos dados e scripts (módulos).
 
-## 4. Evolução desde a M1;
+Sobre os direcionamentos do feedback que foram: 
+1. Fixar uma região oceânica, uma pequena série de datas e bandas necessárias. (fizemos)
+2. Definir precisamente L1C, produto de referência e alinhamento/resolução antes da comparação pixel a pixel. (fizemos)
+3. Implementar controle de qualidade que rejeite cenas inválidas e pixels com nuvem/terra. (fizemos, no caso é as cenas com menos de 5% de pixels válidos de água que não são corrigidas) 
+4. Comparar uma implementação mínima com produto oficial ou ferramenta consolidada, registrando erro por banda. (ainda em desenvolvimento, atualmente comparação só visual)
+5. Não transformar as aplicações futuras — óleo, plástico, algas — em novos objetivos; elas são apenas motivação. (Essas questões específicas estão fora do escop sim)
 
-PREENCHER
+## 4. Evolução desde a M1
+Sobre isso fizemos adição do dataset com 4 AOIs, de 3 datas diferentes e de níveis L1C e L2A, adicionamos também os módulos em src o que iniciou o implementação do projeto de fato. 
+
+**4.1** Nosso módulo de leitura: [leitura.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/leitura.py). Esse módulo vai carregar as cenas baixadas do Copernicus que ficam em [images/input](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/images/input), percorrendo as pastas das nossas AOIs e montando os pares L1C/L2A de cada data escolhida.
+
+<img width="821" height="134" alt="image" src="https://github.com/user-attachments/assets/2ca42bf9-c13b-4efe-a7eb-3227d052d8b8" /> 
+
+Essa função abre nossos GeoTIFF e devolve duas camadas: a reflectância da banda e a máscara de dados válidos vulgo datamask.
+
+<img width="1145" height="309" alt="image" src="https://github.com/user-attachments/assets/d1daeb5a-9a4c-4f56-a9f2-04af5968bf4e" />
+
+Já essa função vai ler as bandas de uma cena e vai guardar elas em um dicionário indexado por seus nomes (B01,B02...). A máscara de dados válidos final é a intersecção das máscaras de todas as bandas. (ou seja, um pixel só vai ser válido se existir dado em todas elas.)
+
+Nos testes desse módulo confirmamos que os pares tem as mesmas dimensões e datamask, o que torna nossa comparação pixel a pixel viável. Para visualizar os testes acesse [Test_1](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/Tests_Outputs/Test_1.md) e [Test_2](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/Tests_Outputs/Test_2.md)
+
+**4.2** Nosso módulo que monta as figuras de cor verdadeira das cenas: [figuras.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/figuras.py). Esse módulo gera as imagens em true color para inspeção visual.
+
+<img width="1398" height="236" alt="image" src="https://github.com/user-attachments/assets/3c84a4e5-234f-4e60-b37f-01e0a8a79039" />
+
+Essa função vai empilhar as bandas no canal RGB (respectivamente B04, B03 e B02) e depois vai dividir a reflectância por um valor fixo de 0,4 e limita o valor entre o intervalo [0,1]
+
+Sobre a escala de 0,4: ela equivale ao ganho de x2.5 usado no Copernicus.
+Sobre o datamask, ele é usado como canal de transparência. Desse jeito, as regiões sem dados não aparecem como pixel escuro, que poderia ser confundido com água.
+
+Ao executar o módulo, obtemos uma figura para cada cena, comparando L1C com L2A lado a lado. Podemos visualizar a saída aqui [true_color_outputs](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/images/results/true_color_outputs) e o teste aqui [Test_3](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/Tests_Outputs/Test_3.md).
+
+**4.3** Nosso módulo que faz as máscaras, até agora o mais complexo e importante ainda tem algumas coisas que vamos mudar/implmentar, mas por enquanto o resultado é satisfatório. [mascara.py](https://github.com/ErickLemosB/AC_Open_Ocean/tree/main/src/mascara.py)
+
+<img width="1348" height="1167" alt="image" src="https://github.com/user-attachments/assets/19561644-3ba4-4902-956c-0155553c7660" />
+
+Esse modo basicamente classifica cada pixel do L1C em nuvem, terra, margem ou água válida. Pois só a água válida vai ser usada na correção atmosférica.
+
+Aqui fazemos segmentação por limiar; abertura morfológica (erosão seguida de dilatação, com disco de raio = 1 pixel; Detecção de terra com o NDWI; Margem de segurança (em volta da nuvem); componentes conexos; e por fim um critério de aceite, somente cenas com mais de 5% de água válida vão ser corrigidas.
+
+
+
 
 ## 5. Dados utilizados
  
@@ -80,7 +122,11 @@ listar_cenas → ler_cena → calcular_mascara → descrever_nuvens
  
  
 ## 7.2. Etapas pendentes
-PREENCHER
+
+7.2.1 Geometria, consultar o catálogo de dados STAC de cada cena e pegar os ângulos que precisamos para fazer o cálculos geométricos.
+7.2.2 Correção atmosférica de fato.
+7.2.3 Avaliar os resultados contra L2A por exemplo.
+7.2.4 Figuras e gráficos apresentando e comparando os resultados obtidos com os esperados.
 
  
 ## 8. Testes
@@ -114,19 +160,38 @@ A seguir estão exemplos versionados do conjunto. A composição usa bandas B04,
 
 ## 9. Falhas, limitações e riscos;
 
-PREENCHER
+9.1 Limiar de nuvem é fixo: não se adapta a cena mais clara ou escura
+9.2 Cirrus muito fino pode escapar do limiar de B10
+9.3 Margem de 5 px pode estar grande demais e descartar água boa (ajuste para 4 px está em avaliação)
+9.4 Ainda não validamos a máscara contra nenhuma referência
 
 ## 10. Plano de conclusão para a M3
 
-PREENCHER
+Para a M3 planejamos iniciar de imediato o estudo e implementação dos cálculos geométricos e logo em seguida iniciar o mesmo para a AC. Após rodar uma série de testes, vamos montar nossa metodologia de avaliação, para enfim, com os dados de saída dela fazer o output das comparações.
 
 ## 11. Contribuições dos integrantes 
 
-PREENCHER
+Sobre a participação dos integrantes, o projeto foi feito durante várias micro calls, onde eu abria a tela e mostrava o que tínhamos e juntos tomamos decisões para desenvolvimento e implementação do projeto, a parte de código/commits ficou mais com Erick Lemos Barreto. Decisões, estudos e ajuda na implementação Melissa Moreira de Oliveira e Janine de Paula. Sobre a confecção dos slides e boa parte do relatório, também, Melissa Moreira de Oliveira e Janine de Paula.
 
 ## 12. Referências 
 
-PREENCHER
+https://rasterio.readthedocs.io/en/stable/ 
+https://numpy.org/doc/stable/
+https://docs.python.org/3/library/pathlib.html 
+https://documentation.dataspace.copernicus.eu/Applications/Browser.html 
+https://custom-scripts.sentinel-hub.com/sentinel-2/true_color/
+https://matplotlib.org/stable/
+https://docs.scipy.org/doc/scipy/reference/ndimage.html
+
+GONZALEZ, R. C.; WOODS, R. E. Processamento digital de imagens. 3. ed. Pearson, 2010. cap. 10: segmentação por limiar; cap. 9: erosão, dilatação, abertura, elemento estruturante e componentes conexos com vizinhança-8.
+
+McFEETERS, S. K. The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features. International Journal of Remote Sensing, 17(7), 1425–1432, 1996.
+
+ESA, Sentinel-2 User Handbook: B10 (1375 nm) é a banda de cirrus e B11 (1610 nm) é SWIR.
+
+GORDON, H. R.; WANG, M. Retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS: a preliminary algorithm. Applied Optics, 33(3), 443–452, 1994
+
+
 
 ## 13. Declaração de uso de IA.
  1. Tipo usado: Claude code
