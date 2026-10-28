@@ -176,11 +176,17 @@ Sobre a participação dos integrantes, o projeto foi feito durante várias micr
 ## 12. Referências 
 
 https://rasterio.readthedocs.io/en/stable/ 
+
 https://numpy.org/doc/stable/
+
 https://docs.python.org/3/library/pathlib.html 
+
 https://documentation.dataspace.copernicus.eu/Applications/Browser.html 
+
 https://custom-scripts.sentinel-hub.com/sentinel-2/true_color/
+
 https://matplotlib.org/stable/
+
 https://docs.scipy.org/doc/scipy/reference/ndimage.html
 
 GONZALEZ, R. C.; WOODS, R. E. Processamento digital de imagens. 3. ed. Pearson, 2010. cap. 10: segmentação por limiar; cap. 9: erosão, dilatação, abertura, elemento estruturante e componentes conexos com vizinhança-8.
